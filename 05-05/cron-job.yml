@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hellocron
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hellocron
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - date; echo "hello from your k8s cluster"
+          restartPolicy: OnFailure
+  suspend: false

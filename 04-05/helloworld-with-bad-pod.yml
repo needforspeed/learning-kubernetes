@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bad-helloworld-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bad-helloworld
+  template:
+    metadata:
+      labels:
+        app: bad-helloworld
+    spec:
+      containers:
+      - name: helloworld
+        image: karthequian/unknown-helloworld:latest
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 80

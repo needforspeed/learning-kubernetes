@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logreader-dynamic
+  labels:
+    app: logreader-dynamic
+spec:
+  selector:
+    matchLabels:
+      app: logreader-dynamic
+  template:
+    metadata:
+      labels:
+        app: logreader-dynamic
+    spec:
+      containers:
+      - name: logreader
+        env:
+        - name: log_level
+          valueFrom:
+            configMapKeyRef:
+              key: log_level
+              name: logger
+        image: karthequian/reader:latest
+        resources:
+          limits:
+            memory: 64Mi
+            cpu: 100m

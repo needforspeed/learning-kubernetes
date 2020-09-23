@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logreader
+  labels:
+    app: logreader
+spec:
+  selector:
+    matchLabels:
+      app: logreader
+  template:
+    metadata:
+      labels:
+        app: logreader
+    spec:
+      containers:
+      - name: logreader
+        env:
+        - name: log_level
+          value: error
+        image: karthequian/reader:latest
+        resources:
+          limits:
+            memory: 64Mi
+            cpu: 100m
